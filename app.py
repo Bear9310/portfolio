@@ -10,7 +10,11 @@ import uuid
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'change-me-to-a-very-long-random-secret-key-please'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+import os
+database_url = os.environ.get('DATABASE_URL')
+if database_url and database_url.startswith('postgres://'):
+    database_url = database_url.replace('postgres://', 'postgresql://', 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50 MB
