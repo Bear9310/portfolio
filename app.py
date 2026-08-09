@@ -355,7 +355,7 @@ def init_db():
         if not User.query.filter_by(username='admin').first():
             admin = User(
                 username='admin',
-                password=generate_password_hash('admin123')
+                password=generate_password_hash('Naim@9310')
             )
             db.session.add(admin)
             db.session.commit()
