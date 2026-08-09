@@ -366,6 +366,17 @@ def init_db():
             print(">>> CHANGE THE PASSWORD IMMEDIATELY after first login <<<")
             print("=" * 50)
 
+# Create tables when the app starts (needed for Render / gunicorn)
+with app.app_context():
+    db.create_all()
+    if not User.query.filter_by(username='admin').first():
+        admin = User(
+            username='admin',
+            password=generate_password_hash('admin123')
+        )
+        db.session.add(admin)
+        db.session.commit()
+        print("Admin account created: admin / admin123")
+
 if __name__ == '__main__':
-    init_db()
     app.run(debug=True, host='0.0.0.0', port=5000)
