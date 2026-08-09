@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Contact · Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="fw-bold mb-2">Get in Touch</h1>
+                <p class="text-secondary lead">Have a question, collaboration idea, or just want to say hello? Send me a message.</p>
+            </div>
+
+            <div class="card glass-card border-0">
+                <div class="card-body p-4 p-md-5">
+                    <form method="POST" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Your Name <span class="text-danger">*</span></label>
+                                <input type="text" name="name" class="form-control bg-dark border-secondary text-light"
+                                       required maxlength="100" placeholder="John Doe">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                                <input type="email" name="email" class="form-control bg-dark border-secondary text-light"
+                                       required maxlength="150" placeholder="you@example.com">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Subject</label>
+                                <input type="text" name="subject" class="form-control bg-dark border-secondary text-light"
+                                       maxlength="200" placeholder="Project inquiry / Feedback / Other">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Message <span class="text-danger">*</span></label>
+                                <textarea name="message" rows="6" class="form-control bg-dark border-secondary text-light"
+                                          required placeholder="Write your message here..."></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-lg px-4">
+                                    <i class="bi bi-send"></i> Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <p class="text-center text-muted small mt-4">
+                Your information is only used to respond to your message.
+                See our <a href="{{ url_for('privacy') }}" class="text-secondary">Privacy Policy</a>.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

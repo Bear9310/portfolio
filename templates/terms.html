@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Terms of Service · Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <h1 class="fw-bold mb-2">Terms of Service</h1>
+            <p class="text-muted mb-4">Last updated: August 9, 2026</p>
+
+            <div class="legal-content">
+                <p>By accessing or using this website (the “Site”), you agree to be bound by these Terms of Service. If you do not agree, please do not use the Site.</p>
+
+                <h2 class="h4 mt-4">1. Use of the Site</h2>
+                <p>You may browse the portfolio, view project information, open live demos (where available), and download files that are explicitly offered for download. You agree to use the Site only for lawful purposes and in a way that does not infringe the rights of others or restrict anyone else’s use of the Site.</p>
+
+                <h2 class="h4 mt-4">2. Intellectual Property</h2>
+                <p>All content on this Site — including text, images, code samples, design, logos, and project materials — is owned by the site owner or used with permission, unless otherwise stated. You may not copy, reproduce, distribute, modify, or create derivative works from the content without prior written permission, except for personal, non-commercial viewing or downloading of files that are clearly marked as available for download.</p>
+                <p>Downloaded project files (source code, packages, etc.) may be subject to additional licenses stated within those files or projects. If no license is specified, the files are provided for evaluation and personal learning only.</p>
+
+                <h2 class="h4 mt-4">3. Downloads and External Links</h2>
+                <p>Files offered for download are provided “as is”. We make no warranties regarding their fitness for a particular purpose, security, or freedom from defects. External live-demo links lead to third-party or separately hosted sites; we are not responsible for their content or availability.</p>
+
+                <h2 class="h4 mt-4">4. User Submissions (Contact Form)</h2>
+                <p>When you send a message through the contact form, you grant us the right to use that information solely to respond to you and manage inquiries. You agree not to submit unlawful, abusive, or spam content.</p>
+
+                <h2 class="h4 mt-4">5. Advertising</h2>
+                <p>The Site may display advertisements from third parties (including Google AdSense). We do not control the content of those ads. Your interactions with advertisers are solely between you and the advertiser.</p>
+
+                <h2 class="h4 mt-4">6. Disclaimer of Warranties</h2>
+                <p>The Site and all content and downloads are provided on an “as is” and “as available” basis without warranties of any kind, either express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+
+                <h2 class="h4 mt-4">7. Limitation of Liability</h2>
+                <p>To the fullest extent permitted by law, the site owner shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or data, arising out of or related to your use of the Site or any downloads.</p>
+
+                <h2 class="h4 mt-4">8. Changes to the Terms</h2>
+                <p>We may modify these Terms at any time. The updated version will be indicated by the “Last updated” date. Continued use of the Site after changes constitutes acceptance of the new Terms.</p>
+
+                <h2 class="h4 mt-4">9. Governing Law</h2>
+                <p>These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.</p>
+
+                <h2 class="h4 mt-4">10. Contact</h2>
+                <p>Questions about these Terms? Please use the <a href="{{ url_for('contact') }}" class="text-secondary">Contact form</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

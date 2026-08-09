@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <h2 class="fw-bold mb-0">Dashboard</h2>
+            <p class="text-secondary mb-0 small">Manage your portfolio projects</p>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+            <a href="{{ url_for('add') }}" class="btn btn-success">
+                <i class="bi bi-plus-lg"></i> Add Project
+            </a>
+            <a href="{{ url_for('admin_messages') }}" class="btn btn-outline-info">
+                <i class="bi bi-envelope"></i> Messages
+            </a>
+            <a href="{{ url_for('change_password') }}" class="btn btn-outline-light">
+                <i class="bi bi-key"></i> Password
+            </a>
+            <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-eye"></i> View Site
+            </a>
+        </div>
+    </div>
+
+    {% if projects %}
+    <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle admin-table">
+            <thead>
+                <tr>
+                    <th style="width:70px">Image</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th style="width:160px">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in projects %}
+                <tr>
+                    <td>
+                        {% if p.image %}
+                        <img src="{{ url_for('static', filename='uploads/' + p.image) }}"
+                             class="admin-thumb rounded" alt="">
+                        {% else %}
+                        <div class="admin-thumb-placeholder rounded d-flex align-items-center justify-content-center">
+                            <i class="bi bi-image text-secondary"></i>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <strong>{{ p.title }}</strong>
+                        {% if p.link %}<br><small class="text-muted"><i class="bi bi-link-45deg"></i> Live</small>{% endif %}
+                        {% if p.file %}<br><small class="text-muted"><i class="bi bi-file-earmark"></i> File</small>{% endif %}
+                    </td>
+                    <td><span class="badge bg-secondary">{{ p.category }}</span></td>
+                    <td>
+                        {% if p.featured %}
+                        <span class="badge bg-warning text-dark">Featured</span>
+                        {% else %}
+                        <span class="text-muted small">—</span>
+                        {% endif %}
+                    </td>
+                    <td class="small text-secondary">{{ p.created_at.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a href="{{ url_for('edit', id=p.id) }}" class="btn btn-outline-warning" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="{{ url_for('project_detail', id=p.id) }}" class="btn btn-outline-info" title="View" target="_blank">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            <form method="POST" action="{{ url_for('delete', id=p.id) }}" class="d-inline"
+                                  onsubmit="return confirm('Delete «{{ p.title }}» permanently?');">
+                                <button type="submit" class="btn btn-outline-danger" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5 empty-state">
+        <i class="bi bi-folder-plus fs-1 text-secondary d-block mb-3"></i>
+        <h4>No projects yet</h4>
+        <p class="text-muted">Add your first project to start showcasing your work.</p>
+        <a href="{{ url_for('add') }}" class="btn btn-success mt-2">
+            <i class="bi bi-plus-lg"></i> Add Project
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

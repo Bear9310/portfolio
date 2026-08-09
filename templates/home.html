@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}My Projects · Portfolio{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero text-center py-5">
+    <div class="container">
+        <h1 class="display-5 fw-bold mb-3 gradient-text">My Projects & Apps</h1>
+        <p class="lead text-secondary mb-4 col-lg-8 mx-auto">
+            Explore the websites, tools and applications I’ve built. Try the live demos or download the source / packages.
+        </p>
+    </div>
+</section>
+
+<!-- Search + Filter -->
+<section class="container mb-4">
+    <form method="get" class="row g-2 align-items-center justify-content-center">
+        <div class="col-md-5">
+            <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary text-secondary"><i class="bi bi-search"></i></span>
+                <input type="text" name="q" value="{{ current_q }}" class="form-control bg-dark border-secondary text-light"
+                       placeholder="Search projects...">
+            </div>
+        </div>
+        <div class="col-auto">
+            <select name="category" class="form-select bg-dark border-secondary text-light" onchange="this.form.submit()">
+                <option value="All" {% if current_cat == 'All' %}selected{% endif %}>All categories</option>
+                {% for c in categories %}
+                <option value="{{ c }}" {% if current_cat == c %}selected{% endif %}>{{ c }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Search</button>
+            {% if current_q or current_cat != 'All' %}
+            <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Clear</a>
+            {% endif %}
+        </div>
+    </form>
+</section>
+
+<!-- Projects Grid -->
+<section class="container pb-5">
+    {% if projects %}
+    <div class="row g-4">
+        {% for p in projects %}
+        <div class="col-sm-6 col-lg-4">
+            <div class="card project-card h-100" data-tilt>
+                {% if p.featured %}
+                <span class="badge featured-badge">Featured</span>
+                {% endif %}
+                <a href="{{ url_for('project_detail', id=p.id) }}" class="text-decoration-none text-light">
+                    {% if p.image %}
+                    <img src="{{ url_for('static', filename='uploads/' + p.image) }}"
+                         class="card-img-top project-img" alt="{{ p.title }}" loading="lazy">
+                    {% else %}
+                    <div class="project-img-placeholder d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image fs-1 text-secondary"></i>
+                    </div>
+                    {% endif %}
+                </a>
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-1">
+                        <h5 class="card-title mb-0">{{ p.title }}</h5>
+                        <span class="badge bg-secondary category-badge">{{ p.category }}</span>
+                    </div>
+                    <p class="card-text text-secondary flex-grow-1 small">
+                        {{ p.short_desc or (p.description[:140] + ('...' if p.description|length > 140 else '')) }}
+                    </p>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        <a href="{{ url_for('project_detail', id=p.id) }}" class="btn btn-sm btn-outline-light">
+                            <i class="bi bi-eye"></i> Details
+                        </a>
+                        {% if p.link %}
+                        <a href="{{ p.link }}" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+                            <i class="bi bi-box-arrow-up-right"></i> Live
+                        </a>
+                        {% endif %}
+                        {% if p.file %}
+                        <a href="{{ url_for('download', filename=p.file) }}" class="btn btn-sm btn-success">
+                            <i class="bi bi-download"></i> Download
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5 empty-state">
+        <i class="bi bi-inbox fs-1 text-secondary d-block mb-3"></i>
+        <h4 class="text-secondary">No projects found</h4>
+        <p class="text-muted">Try a different search or category.</p>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('add') }}" class="btn btn-primary mt-2">Add your first project</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</section>
+
+<!-- About -->
+<section id="about" class="about-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="fw-bold mb-3">About Me</h2>
+                <p class="text-secondary lead">
+                    Hi! I’m a developer who loves building useful websites and apps.
+                    This portfolio showcases selected projects — from full web applications to small tools.
+                    Feel free to explore, try the demos, or download the files.
+                </p>
+                <p class="text-muted">
+                    Want to collaborate or have a question? Reach out via the links in the footer.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

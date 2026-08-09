@@ -1,0 +1,207 @@
+:root {
+    --bg: #0a0a0f;
+    --card: #12121a;
+    --border: #2a2a3a;
+    --primary: #6366f1;
+    --primary-hover: #818cf8;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+main {
+    flex: 1;
+}
+
+/* Navbar */
+.glass-nav {
+    background: rgba(10, 10, 15, 0.85) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar-brand {
+    letter-spacing: -0.02em;
+}
+
+/* Hero */
+.hero {
+    background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15), transparent 60%);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #a5b4fc, #c4b5fd, #f0abfc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Cards */
+.project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+    position: relative;
+}
+
+.project-card:hover {
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.25);
+}
+
+.project-img {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.05);
+}
+
+.project-img-placeholder {
+    height: 180px;
+    background: linear-gradient(135deg, #1e1e2e, #2a2a3a);
+}
+
+.project-detail-img {
+    max-height: 420px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.featured-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: #000;
+    font-weight: 600;
+    font-size: 0.7rem;
+    padding: 0.35em 0.7em;
+}
+
+.category-badge {
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+/* Glass card */
+.glass-card {
+    background: var(--card);
+    border: 1px solid var(--border) !important;
+    border-radius: 1rem;
+}
+
+/* Admin */
+.admin-table {
+    --bs-table-bg: transparent;
+    border-color: var(--border);
+}
+
+.admin-thumb {
+    width: 56px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.admin-thumb-placeholder {
+    width: 56px;
+    height: 40px;
+    background: #1e1e2e;
+}
+
+/* About */
+.about-section {
+    background: linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.06));
+    border-top: 1px solid var(--border);
+}
+
+/* Footer */
+.footer {
+    border-top: 1px solid var(--border);
+    background: #08080c;
+}
+
+.social-link:hover {
+    color: var(--primary) !important;
+    transform: translateY(-2px);
+    transition: all 0.2s;
+}
+
+/* Empty state */
+.empty-state {
+    opacity: 0.85;
+}
+
+/* Form controls */
+.form-control:focus,
+.form-select:focus {
+    background-color: #1a1a24;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+    color: var(--text);
+}
+
+.form-control::placeholder {
+    color: #64748b;
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+/* Toast colors */
+.text-bg-success { background-color: #059669 !important; }
+.text-bg-danger { background-color: #dc2626 !important; }
+.text-bg-warning { background-color: #d97706 !important; color: #fff !important; }
+.text-bg-info { background-color: #0284c7 !important; }
+
+/* Breadcrumb */
+.breadcrumb-item a {
+    color: var(--primary);
+}
+
+/* Legal pages */
+.legal-content h2 {
+    color: #a5b4fc;
+    margin-top: 1.75rem;
+}
+.legal-content ul {
+    padding-left: 1.25rem;
+}
+.legal-content a {
+    text-decoration: underline;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+    .project-img, .project-img-placeholder {
+        height: 150px;
+    }
+}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Contact Messages · Admin{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <h2 class="fw-bold mb-0">Contact Messages</h2>
+            <p class="text-secondary mb-0 small">Messages submitted via the contact form</p>
+        </div>
+        <a href="{{ url_for('admin') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    {% if messages %}
+    <div class="row g-3">
+        {% for m in messages %}
+        <div class="col-12">
+            <div class="card glass-card border-0 {% if not m.is_read %}border-start border-info border-3{% endif %}">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                        <div>
+                            <h5 class="mb-1">
+                                {% if not m.is_read %}<span class="badge bg-info me-1">New</span>{% endif %}
+                                {{ m.subject or 'No subject' }}
+                            </h5>
+                            <p class="mb-0 small text-secondary">
+                                From <strong>{{ m.name }}</strong> &lt;{{ m.email }}&gt;
+                                · {{ m.created_at.strftime('%Y-%m-%d %H:%M') }}
+                            </p>
+                        </div>
+                        <div class="d-flex gap-1">
+                            {% if not m.is_read %}
+                            <form method="POST" action="{{ url_for('mark_message_read', id=m.id) }}" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-info">Mark read</button>
+                            </form>
+                            {% endif %}
+                            <form method="POST" action="{{ url_for('delete_message', id=m.id) }}" class="d-inline"
+                                  onsubmit="return confirm('Delete this message?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <p class="mb-0" style="white-space: pre-line">{{ m.message }}</p>
+                    <div class="mt-2">
+                        <a href="mailto:{{ m.email }}?subject=Re: {{ m.subject or 'Your message' }}" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-reply"></i> Reply by email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5 empty-state">
+        <i class="bi bi-inbox fs-1 text-secondary d-block mb-3"></i>
+        <h4>No messages yet</h4>
+        <p class="text-muted">When visitors use the contact form, their messages will appear here.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

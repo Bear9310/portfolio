@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{ project.title }} · Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}" class="text-decoration-none">Projects</a></li>
+            <li class="breadcrumb-item active text-secondary" aria-current="page">{{ project.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            {% if project.image %}
+            <img src="{{ url_for('static', filename='uploads/' + project.image) }}"
+                 class="img-fluid rounded-4 shadow project-detail-img" alt="{{ project.title }}">
+            {% else %}
+            <div class="project-img-placeholder rounded-4 d-flex align-items-center justify-content-center" style="height:320px">
+                <i class="bi bi-image fs-1 text-secondary"></i>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-lg-6">
+            <div class="d-flex flex-wrap gap-2 mb-3">
+                {% if project.featured %}
+                <span class="badge bg-warning text-dark">Featured</span>
+                {% endif %}
+                <span class="badge bg-secondary">{{ project.category }}</span>
+            </div>
+            <h1 class="fw-bold mb-3">{{ project.title }}</h1>
+            <p class="text-secondary mb-4" style="white-space: pre-line">{{ project.description }}</p>
+
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                {% if project.link %}
+                <a href="{{ project.link }}" target="_blank" rel="noopener" class="btn btn-primary">
+                    <i class="bi bi-box-arrow-up-right"></i> Open Live Demo
+                </a>
+                {% endif %}
+                {% if project.file %}
+                <a href="{{ url_for('download', filename=project.file) }}" class="btn btn-success">
+                    <i class="bi bi-download"></i> Download File
+                </a>
+                {% endif %}
+                <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Back
+                </a>
+            </div>
+
+            <div class="text-muted small">
+                <i class="bi bi-calendar3"></i>
+                Added {{ project.created_at.strftime('%B %d, %Y') }}
+                {% if project.updated_at and project.updated_at != project.created_at %}
+                · Updated {{ project.updated_at.strftime('%B %d, %Y') }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

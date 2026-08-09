@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Privacy Policy · Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <h1 class="fw-bold mb-2">Privacy Policy</h1>
+            <p class="text-muted mb-4">Last updated: August 9, 2026</p>
+
+            <div class="legal-content">
+                <p>This Privacy Policy describes how this website (“we”, “us”, or “our”) collects, uses, and shares information when you visit or use our portfolio site.</p>
+
+                <h2 class="h4 mt-4">1. Information We Collect</h2>
+                <p>We may collect the following types of information:</p>
+                <ul>
+                    <li><strong>Contact form data</strong> — When you submit the contact form, we collect your name, email address, subject, and message so we can respond to you.</li>
+                    <li><strong>Usage data</strong> — Like most websites, we may automatically collect technical information such as IP address, browser type, device type, pages visited, and referring URL. This helps us understand how visitors use the site.</li>
+                    <li><strong>Cookies and similar technologies</strong> — We and third-party partners (including advertising partners) may use cookies, web beacons, and similar technologies to collect information about your browsing activity.</li>
+                </ul>
+
+                <h2 class="h4 mt-4">2. How We Use Your Information</h2>
+                <ul>
+                    <li>To respond to your inquiries and messages</li>
+                    <li>To operate, maintain, and improve the website</li>
+                    <li>To analyze usage and trends</li>
+                    <li>To display relevant advertisements (including through Google AdSense and similar services)</li>
+                    <li>To protect the security and integrity of the site</li>
+                </ul>
+
+                <h2 class="h4 mt-4">3. Google AdSense & Third-Party Advertising</h2>
+                <p>This site may use <strong>Google AdSense</strong> and other third-party advertising services. Google and other ad partners use cookies (including the DoubleClick cookie) and similar technologies to serve ads based on your prior visits to this and other websites.</p>
+                <p>Google’s use of advertising cookies enables it and its partners to serve ads based on your visit to this site and/or other sites on the Internet. You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener" class="text-secondary">Google Ads Settings</a>.</p>
+                <p>For more information about how Google uses data, see <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener" class="text-secondary">How Google uses information from sites or apps that use our services</a>.</p>
+
+                <h2 class="h4 mt-4">4. Cookies</h2>
+                <p>We use cookies for essential site functionality, analytics, and advertising. You can control or delete cookies through your browser settings. Disabling cookies may affect some features of the site and the relevance of ads you see.</p>
+
+                <h2 class="h4 mt-4">5. Data Sharing</h2>
+                <p>We do not sell your personal information. We may share data with:</p>
+                <ul>
+                    <li>Service providers who help us operate the site (hosting, analytics)</li>
+                    <li>Advertising partners such as Google (as described above)</li>
+                    <li>Authorities when required by law or to protect our rights</li>
+                </ul>
+
+                <h2 class="h4 mt-4">6. Data Retention</h2>
+                <p>Contact form messages are retained so we can respond and keep a record of inquiries. You may request deletion of your contact data by contacting us.</p>
+
+                <h2 class="h4 mt-4">7. Your Rights</h2>
+                <p>Depending on your location, you may have rights to access, correct, delete, or restrict the processing of your personal data. To exercise these rights, please contact us using the contact form or email listed on this site.</p>
+
+                <h2 class="h4 mt-4">8. Children’s Privacy</h2>
+                <p>This website is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
+
+                <h2 class="h4 mt-4">9. Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. The “Last updated” date at the top will be revised when changes are made. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+
+                <h2 class="h4 mt-4">10. Contact Us</h2>
+                <p>If you have questions about this Privacy Policy or our data practices, please use the <a href="{{ url_for('contact') }}" class="text-secondary">Contact form</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
