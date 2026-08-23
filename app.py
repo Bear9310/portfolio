@@ -1,3 +1,4 @@
+from flask_wtf.csrf import CSRFProtect
 from flask import Flask, render_template, redirect, url_for, request, flash, send_from_directory, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -9,7 +10,8 @@ import os
 import uuid
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'change-me-to-a-very-long-random-secret-key-please'
+csrf = CSRFProtect(app)
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback-secret-key')
 import os
 database_url = os.environ.get('DATABASE_URL')
 if database_url and database_url.startswith('postgres://'):
