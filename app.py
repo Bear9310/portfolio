@@ -353,34 +353,22 @@ def delete_message(id):
     return redirect(url_for('admin_messages'))
 
 # ---------- Setup ----------
-def init_db():
-    with app.app_context():
-        db.create_all()
-        if not User.query.filter_by(username='admin').first():
-            admin = User(
-                username='admin',
-                password=generate_password_hash('Naim@9310')
-            )
-            db.session.add(admin)
-            db.session.commit()
-            print("=" * 50)
-            print("Admin account created!")
-            print("Username: admin")
-            print("Password: admin123")
-            print(">>> CHANGE THE PASSWORD IMMEDIATELY after first login <<<")
-            print("=" * 50)
-
-# Create tables when the app starts (needed for Render / gunicorn)
+# Create tables + Force reset admin password
 with app.app_context():
     db.create_all()
-    if not User.query.filter_by(username='admin').first():
+    admin = User.query.filter_by(username='admin').first()
+    if admin:
+        admin.password = generate_password_hash('Naim@9310')
+        db.session.commit()
+        print("Admin password has been RESET to: Naim@9310")
+    else:
         admin = User(
             username='admin',
-            password=generate_password_hash('admin123')
+            password=generate_password_hash('Naim@9310')
         )
         db.session.add(admin)
         db.session.commit()
-        print("Admin account created: admin / admin123")
+        print("Admin account created with password: Naim@9310")
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
