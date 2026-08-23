@@ -353,22 +353,17 @@ def delete_message(id):
     return redirect(url_for('admin_messages'))
 
 # ---------- Setup ----------
-# Create tables + Force reset admin password
+# Create tables on startup
 with app.app_context():
     db.create_all()
-    admin = User.query.filter_by(username='admin').first()
-    if admin:
-        admin.password = generate_password_hash('Naim@9310')
-        db.session.commit()
-        print("Admin password has been RESET to: Naim@9310")
-    else:
+    if not User.query.filter_by(username='admin').first():
         admin = User(
             username='admin',
             password=generate_password_hash('Naim@9310')
         )
         db.session.add(admin)
         db.session.commit()
-        print("Admin account created with password: Naim@9310")
+        print("Admin account created")
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)
