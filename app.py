@@ -371,9 +371,10 @@ def delete_message(id):
     return redirect(url_for('admin_messages'))
 
 # ---------- Setup ----------
-# Create tables on startup
 with app.app_context():
     db.create_all()
+
+    # Create admin if not exists
     if not User.query.filter_by(username='admin').first():
         admin = User(
             username='admin',
@@ -383,5 +384,20 @@ with app.app_context():
         db.session.commit()
         print("Admin account created")
 
-if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    # Add sample blog posts if none exist
+    if BlogPost.query.count() == 0:
+        post1 = BlogPost(
+            title="Welcome to My Blog",
+            content="Hello! This is my first blog post. I will share my journey of learning web development, the projects I build, and useful tips I learn along the way. Stay tuned for more updates!"
+        )
+        post2 = BlogPost(
+            title="Why I Started Building Projects",
+            content="Learning by building real projects is one of the best ways to improve coding skills. In this portfolio, I share the small tools and websites I create while practicing HTML, CSS, JavaScript, Python and Flask."
+        )
+        post3 = BlogPost(
+            title="Tips for Beginners in Web Development",
+            content="If you are just starting web development, focus on the basics first: HTML for structure, CSS for design, and JavaScript for interactivity. Build small projects regularly and don’t be afraid to make mistakes. Every project teaches you something new."
+        )
+        db.session.add_all([post1, post2, post3])
+        db.session.commit()
+        print("Sample blog posts added")
