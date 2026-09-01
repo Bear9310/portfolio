@@ -168,12 +168,6 @@ def contact():
             return redirect(url_for('contact'))
     return render_template('contact.html')
 
-@app.route('/contact', methods=['GET', 'POST'])
-def contact():
-    ...
-    return render_template('contact.html')
-
-
 @app.route('/blog')
 def blog():
     posts = BlogPost.query.order_by(BlogPost.created_at.desc()).all()
