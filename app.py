@@ -60,6 +60,12 @@ class ContactMessage(db.Model):
     is_read = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+class BlogPost(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
 @login_manager.user_loader
 def load_user(user_id):
     return db.session.get(User, int(user_id))
@@ -161,6 +167,22 @@ def contact():
             flash('Thank you! Your message has been sent. I will get back to you soon.', 'success')
             return redirect(url_for('contact'))
     return render_template('contact.html')
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    ...
+    return render_template('contact.html')
+
+
+@app.route('/blog')
+def blog():
+    posts = BlogPost.query.order_by(BlogPost.created_at.desc()).all()
+    return render_template('blog.html', posts=posts)
+
+@app.route('/blog/<int:id>')
+def blog_post(id):
+    post = BlogPost.query.get_or_404(id)
+    return render_template('blog_post.html', post=post)
 
 @app.route('/privacy')
 def privacy():
